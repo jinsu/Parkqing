@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView android:id="@+id/label_loc_name" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:textSize="22sp" 
+	    android:text="@string/loc_name" />
+    <TextView android:id="@+id/loc_name" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+	<TextView android:id="@+id/label_latlng" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:textSize="22sp" 
+	    android:text="@string/latlng" />
+    <TextView android:id="@+id/latlng" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+    <TextView android:id="@+id/label_address" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:textSize="22sp"
+        android:text="@string/address" />
+    <TextView android:id="@+id/address" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:textSize="20sp" />    
+	<Button android:id="@+id/save_location" 
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content"
+	    android:text="@string/save_location" 
+	    android:minWidth="160sp" 
+	    android:onClick="onClick" />
+	<!-- TODO: a Button to delete -->
+	<LinearLayout
+	    android:id="@+id/recent1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+	    
+	    <TextView android:id="@+id/label_recent1_ln"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="22sp"
+	        android:text="@string/loc_name" />
+	    <TextView android:id="@+id/recent1_ln"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="20sp" />
+	    <TextView android:id="@+id/label_recent1_latlng"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="22sp"
+	        android:text="@string/latlng" />
+	    <TextView android:id="@+id/recent1_latlng"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="20sp" />
+	</LinearLayout>
+	<LinearLayout
+	    android:id="@+id/recent2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+	    
+	    <TextView android:id="@+id/label_recent2_ln"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="22sp"
+	        android:text="@string/loc_name" />
+	    <TextView android:id="@+id/recent2_ln"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="20sp" />
+	    <TextView android:id="@+id/label_recent2_latlng"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="22sp"
+	        android:text="@string/latlng" />
+	    <TextView android:id="@+id/recent2_latlng"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="20sp" />
+	</LinearLayout>
+</LinearLayout>
