@@ -3,16 +3,12 @@ package com.ojk.parkqing;
 import java.util.List;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class RecentLocationActivity extends ListActivity {
 	private PLocationDataSource datasource;
@@ -73,14 +69,17 @@ public class RecentLocationActivity extends ListActivity {
 	// Will be called via the onClick attribute
 	// of the buttons in activity_main.xml
 	public void saveLocation(Intent intent) {
-		@SuppressWarnings("unchecked")
-		ArrayAdapter<PLocation> adapter = (ArrayAdapter<PLocation>) getListAdapter();
 		retrieveIntentMsg(intent);
 
-		// Save the new PLocation to the database
-		PLocation ploc = datasource.createLocation(rLocName, rLat, rLon);
-		adapter.add(ploc);
-		adapter.notifyDataSetChanged();
+		// if the user just wants to view, don't need to save anything.
+		if (!isViewOnly(intent)) {
+			@SuppressWarnings("unchecked")
+			ArrayAdapter<PLocation> adapter = (ArrayAdapter<PLocation>) getListAdapter();
+			// Save the new PLocation to the database
+			PLocation ploc = datasource.createLocation(rLocName, rLat, rLon);
+			adapter.add(ploc);
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	@Override
@@ -101,5 +100,9 @@ public class RecentLocationActivity extends ListActivity {
 		rLon = intent.getDoubleExtra(MainActivity.LONGITUDE, 0);
 		rLat = intent.getDoubleExtra(MainActivity.LATITUDE, 0);
 		rAddr = intent.getStringExtra(MainActivity.ADDRESS);
+	}
+	
+	private boolean isViewOnly(Intent intent) {
+		return intent.getBooleanExtra(MainActivity.VIEW_ONLY, true);
 	}
 }

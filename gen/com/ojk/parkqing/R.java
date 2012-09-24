@@ -26,7 +26,7 @@ public final class R {
         public static final int label_recent2_ln=0x7f07000d;
         public static final int latlng=0x7f070003;
         public static final int loc_name=0x7f070001;
-        public static final int menu_settings=0x7f070012;
+        public static final int menu_settings=0x7f070013;
         public static final int recent1=0x7f070007;
         public static final int recent1_latlng=0x7f07000b;
         public static final int recent1_ln=0x7f070009;
@@ -34,6 +34,7 @@ public final class R {
         public static final int recent2_latlng=0x7f070010;
         public static final int recent2_ln=0x7f07000e;
         public static final int save_location=0x7f070006;
+        public static final int view_recent_button=0x7f070012;
     }
     public static final class layout {
         public static final int activity_display_parking_location=0x7f030000;
@@ -63,6 +64,7 @@ public final class R {
         public static final int title_activity_main=0x7f040002;
         public static final int title_activity_recent_location=0x7f040010;
         public static final int unknown=0x7f04000c;
+        public static final int view_recent=0x7f040012;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

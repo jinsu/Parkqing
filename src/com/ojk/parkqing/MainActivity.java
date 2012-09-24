@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity {
 	public final static String LATITUDE = "com.ojk.parkqing.LAT";
 	public final static String LONGITUDE = "com.ojk.parkqing.LON";
 	public final static String ADDRESS = "com.ojk.parkqing.ADDRESS";
+	public final static String VIEW_ONLY = "com.ojk.parkqing.VIEW_ONLY";
 
 	private TextView mLatLng;
 	private TextView mAddress;
@@ -161,6 +162,13 @@ public class MainActivity extends FragmentActivity {
 		intent.putExtra(LONGITUDE, lon);
 		String addr = mAddress.getText().toString();
 		intent.putExtra(ADDRESS, addr);
+		switch(view.getId()) {
+		case R.id.save_location:
+			intent.putExtra(VIEW_ONLY, false);
+			break;
+		case R.id.view_recent_button:
+			intent.putExtra(VIEW_ONLY, true);
+		}		
 		startActivity(intent);
 	}
 

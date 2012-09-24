@@ -58,7 +58,7 @@ public class PLocationDataSource {
 	    List<PLocation> locs = new ArrayList<PLocation>();
 
 	    Cursor cursor = database.query(MySQLiteHelper.TABLE_LOCATION,
-	        allColumns, null, null, null, null, null);
+	        allColumns, null, null, null, null, MySQLiteHelper.COLUMN_ID + " DESC");
 
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
