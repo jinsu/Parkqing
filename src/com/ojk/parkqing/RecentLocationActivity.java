@@ -1,4 +1,5 @@
-package com.ojk.parkqing;
+package com.
+ojk.parkqing;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class RecentLocationActivity extends ListActivity {
 		Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 				Uri.parse("http://maps.google.com/maps?saddr=&daddr=" + loc.getCoordString() + "&sensor=true"));
 		startActivity(intent);
+		
 		/* Toast.makeText(getApplicationContext(), "You have chosen: " + msg, Toast.LENGTH_LONG).show();*/
 	}
 	@Override
@@ -77,9 +79,18 @@ public class RecentLocationActivity extends ListActivity {
 			ArrayAdapter<PLocation> adapter = (ArrayAdapter<PLocation>) getListAdapter();
 			// Save the new PLocation to the database
 			PLocation ploc = datasource.createLocation(rLocName, rLat, rLon);
-			adapter.add(ploc);
+			//TODO: performance boost tip-> just sort the adapter
+			//query the list again and assign new list adapter object
+			
+			//adapter.add(ploc);
+			//adapter.notifyDataSetChanged();
+			
+			adapter.notifyDataSetInvalidated();
+			adapter = new ArrayAdapter<PLocation>(this,
+					android.R.layout.simple_list_item_1, datasource.getAllPLocations());
+			setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
-		}
+			}
 	}
 
 	@Override

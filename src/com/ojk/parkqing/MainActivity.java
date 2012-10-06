@@ -175,7 +175,6 @@ public class MainActivity extends FragmentActivity {
 	// Set up both fine and coarse location providers for use.
 	private void setup() {
 		Location gpsLocation = null;
-		Location networkLocation = null;
 		mLocationManager.removeUpdates(listener);
 		mLatLng.setText(R.string.unknown);
 		mAddress.setText(R.string.unknown);
@@ -248,8 +247,13 @@ public class MainActivity extends FragmentActivity {
 
 		// Do reverse-geocoding only if the Geocoder service is available on the
 		// device.
-		if (mGeocoderAvailable)
+		if (mGeocoderAvailable) {
 			doReverseGeocoding(location);
+		} else {
+			Message.obtain(mHandler, UPDATE_ADDRESS,
+					"Sorry, your device doesn't support this yet. :(")
+					.sendToTarget();
+		}
 	}
 
 	private final LocationListener listener = new LocationListener() {
@@ -365,8 +369,8 @@ public class MainActivity extends FragmentActivity {
 			} catch (IOException e) {
 				e.printStackTrace();
 				// Update address field with the exception.
-				Message.obtain(mHandler, UPDATE_ADDRESS, e.toString())
-						.sendToTarget();
+				//Message.obtain(mHandler, UPDATE_ADDRESS, e.toString()).sendToTarget();
+				Message.obtain(mHandler, UPDATE_ADDRESS, "Having Trouble...are you connected to a network?").sendToTarget();
 			}
 			if (addresses != null && addresses.size() > 0) {
 				Address address = addresses.get(0);

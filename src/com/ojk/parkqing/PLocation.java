@@ -1,6 +1,6 @@
 package com.ojk.parkqing;
 
-public class PLocation {
+public class PLocation{
 	private long id;
 	private String name;
 	private int latitude;
@@ -72,4 +72,5 @@ public class PLocation {
 	public String getCoordString() {
 		return getLongitudeDouble() + "," + getLatitudeDouble();
 	}
+	
 }
