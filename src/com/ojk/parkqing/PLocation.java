@@ -1,6 +1,12 @@
 package com.ojk.parkqing;
 
 public class PLocation{
+	public final static String LOCATION_NAME = "com.ojk.parkqing.LOC_NAME";
+	public final static String LATITUDE = "com.ojk.parkqing.LAT";
+	public final static String LONGITUDE = "com.ojk.parkqing.LON";
+	public final static String LOCATION_ID = "com.ojk.parkqing.LOCATION_ID";
+	public final static String COORD_STR = "com.ojk.parkqing.COORD_STR";
+	
 	private long id;
 	private String name;
 	private int latitude;

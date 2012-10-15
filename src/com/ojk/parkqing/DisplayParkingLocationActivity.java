@@ -68,7 +68,7 @@ public class DisplayParkingLocationActivity extends FragmentActivity {
     	
     	//Label the location 
     	Intent intent = getIntent();
-    	String loc_name = intent.getStringExtra(MainActivity.LOCATION_NAME);
+    	String loc_name = intent.getStringExtra(PLocation.LOCATION_NAME);
         mLocName.setText(loc_name);
     	
     	// Receive location updates from both the fine (gps) and coarse (network) location provider only

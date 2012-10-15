@@ -9,6 +9,7 @@
     <string name="enable_gps">Enable GPS</string>
     <string name="enable_gps_dialog">GPS provider not enabled. Would you like to enable it?</string>
     <string name="latlng">Lat/Long:</string>
+    <string name="distance">Distance:</string>
     <string name="loc_name">Location Name</string>
     <string name="save_location">Remember ParKQing</string>
     <string name="recentLocation">Recent Locations</string>
@@ -17,7 +18,9 @@
     <string name="not_support_network">Network provider not supported</string>
     <string name="title_activity_display_parking_location">Parking Location</string>
     <string name="title_activity_recent_location">Recent Locations</string>
+    <string name="title_activity_view_location">View a Location</string>
     <string name="pLocation">ParKQing Location</string>
     <string name="view_recent">View Recent Parkings</string>
+    <string name="get_nav">Get Navigation</string>
 
 </resources>

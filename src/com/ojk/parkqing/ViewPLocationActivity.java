@@ -15,27 +15,30 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
-	public final static String ADDRESS = "com.ojk.parkqing.ADDRESS";
-	public final static String VIEW_ONLY = "com.ojk.parkqing.VIEW_ONLY";
-
+public class ViewPLocationActivity extends FragmentActivity {
 	private TextView mLatLng;
-	private TextView mAddress;
-	private TextView mLocName;
+	private TextView mAddr;
+	private TextView mDist;
+	private String mLocName;
+	private String mCoordStr;
+	private Double mLon;
+	private Double mLat;
+	private long mId;
+	
+	private final static int earthRadius = 6371; //km
+	
 	private LocationManager mLocationManager;
 	private Handler mHandler;
 	private boolean mGeocoderAvailable;
@@ -43,6 +46,7 @@ public class MainActivity extends FragmentActivity {
 	// UI handler codes.
 	private static final int UPDATE_ADDRESS = 1;
 	private static final int UPDATE_LATLNG = 2;
+	private static final int UPDATE_DISTANCE = 3;
 
 	private static final int TWO_METERS = 2;
 	private static final int TEN_SECONDS = 10000;
@@ -51,66 +55,50 @@ public class MainActivity extends FragmentActivity {
 	// temporary solution
 	public static double mLatitude = 0;
 	public static double mLongitude = 0;
-	private final int MULTIPLIER = 1000000;
-	
+
+	/** Called when the activity is first created. */
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		mLatLng = (TextView) findViewById(R.id.latlng);
-		mAddress = (TextView) findViewById(R.id.address);
-		mLocName = (EditText) findViewById(R.id.edit_loc_name);
-
-		// The isPresent() helper method is only available on Gingerbread or
-		// above.
-		mGeocoderAvailable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD
-				&& Geocoder.isPresent();
-
+	    super.onCreate(savedInstanceState);
+	    
+	    //hookup the layout
+	    setContentView(R.layout.activity_view_plocation);
+	    
+	    mLatLng = (TextView) findViewById(R.id.view_ploc_latlng);
+	    mAddr = (TextView) findViewById(R.id.view_ploc_addr);
+	    mDist = (TextView) findViewById(R.id.view_ploc_distance);
+	    
 		// Handler for updating text fields on the UI like the lat/long and
 		// address
 		mHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
-				case UPDATE_ADDRESS:
-					mAddress.setText((String) msg.obj);
-					break;
 				case UPDATE_LATLNG:
 					mLatLng.setText((String) msg.obj);
 					break;
+				case UPDATE_DISTANCE:
+					mDist.setText((String) msg.obj);
 				}
 			}
 		};
 
 		// Get a reference to the locationManager object
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	    
+	    //bring in the msg from intent
+	    Intent intent = getIntent();
+		retrieveIntentMsg(intent);	    
 	}
-
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-
-	// Skipped onSaveInstanceState() function that restores UI state after
-	// rotation
-
-	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		setup();
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-
+	public void onStart() {
 		// Check if the GPS setting is currently enabled on the device.
 		// This verification should be done during onStart() because the system
 		// calls this method
@@ -127,9 +115,11 @@ public class MainActivity extends FragmentActivity {
 			// the location services, then when the user clicks the "Ok" button,
 			// call enableLocationSettings()
 			new EnableGpsDialogFragment().show(getSupportFragmentManager(),
-					"enableGpsDialog");
+				"enableGpsDialog");
 		}
+		super.onStart();
 	}
+	
 
 	// Method to launch settings
 	private void enableLocationSettings() {
@@ -144,37 +134,50 @@ public class MainActivity extends FragmentActivity {
 		super.onStop();
 		mLocationManager.removeUpdates(listener);
 	}
-
-	// Save the ParKQing location information
-	// Will be called via the onClick attribute
-	// of the buttons in activity_main.xml
-	/** Called when the user clicks the Park button */
-	public void sendParkMessage(View view) {
-		Intent intent = new Intent(this, RecentLocationActivity.class);
-		String loc = mLocName.getText().toString();
-		intent.putExtra(PLocation.LOCATION_NAME, loc);
-		double lat = mLatitude;
-		intent.putExtra(PLocation.LATITUDE, lat);
-		double lon = mLongitude;
-		intent.putExtra(PLocation.LONGITUDE, lon);
-		String addr = mAddress.getText().toString();
-		intent.putExtra(ADDRESS, addr);
-		switch(view.getId()) {
-		case R.id.save_location:
-			intent.putExtra(VIEW_ONLY, false);
-			break;
-		case R.id.view_recent_button:
-			intent.putExtra(VIEW_ONLY, true);
-		}		
-		startActivity(intent);
+	
+	@Override
+	public void onPause() {
+		super.onPause();
 	}
-
+	
+	private String calculateDistance() {
+		/**
+		 * var dLat = (lat2-lat1).toRad();
+var dLon = (lon2-lon1).toRad();
+var lat1 = lat1.toRad();
+var lat2 = lat2.toRad();
+var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+var d = R * c;
+		 **/
+		//mLat
+		//double dLat = (m)
+		//MainActivity.mLatitude;
+		//MainActivity.mLongitude;
+		return "-5 mile(s)";
+	}
+	
+	private void retrieveIntentMsg(Intent intent) {
+		mLocName = intent.getStringExtra(PLocation.LOCATION_NAME);
+		mLon = intent.getDoubleExtra(PLocation.LONGITUDE, 0);
+		mLat = intent.getDoubleExtra(PLocation.LATITUDE, 0);
+		mId = intent.getLongExtra(PLocation.LOCATION_ID, 0);
+		mCoordStr = intent.getStringExtra(PLocation.COORD_STR);
+	}
+	
+	public void sendToNavigation(View view) {
+		Intent intentGmap = new Intent(android.content.Intent.ACTION_VIEW,
+		Uri.parse("http://maps.google.com/maps?saddr=&daddr=" + mCoordStr + "&sensor=true"));
+		startActivity(intentGmap);
+	}
+	
 	// Set up both fine and coarse location providers for use.
 	private void setup() {
 		Location gpsLocation = null;
 		mLocationManager.removeUpdates(listener);
 		mLatLng.setText(R.string.unknown);
-		mAddress.setText(R.string.unknown);
+		mAddr.setText(R.string.unknown);
 		// Request updates from both coarse and fine providers
 		gpsLocation = requestUpdatesFromProvider(LocationManager.GPS_PROVIDER,
 				R.string.not_support_gps);
@@ -221,14 +224,14 @@ public class MainActivity extends FragmentActivity {
 		}
 		return location;
 	}
-
+	
 	private void doReverseGeocoding(Location location) {
 		// since the geocoding API is synchronous and may take a while, you
 		// don't want to
 		// lock up the UI thread. Invoking reverse geocoding in an AsyncTask.
 		(new ReverseGeocodingTask(this)).execute(new Location[] { location });
 	}
-
+	
 	private void updateUILocation(Location location) {
 		// temporary
 		// TODO: a better way
@@ -241,6 +244,7 @@ public class MainActivity extends FragmentActivity {
 		Message.obtain(mHandler, UPDATE_LATLNG,
 				location.getLatitude() + ", " + location.getLongitude())
 				.sendToTarget();
+		Message.obtain(mHandler, UPDATE_DISTANCE, calculateDistance()).sendToTarget();
 
 		// Do reverse-geocoding only if the Geocoder service is available on the
 		// device.
@@ -251,6 +255,10 @@ public class MainActivity extends FragmentActivity {
 					"Sorry, your device doesn't support this yet. :(")
 					.sendToTarget();
 		}
+		
+		//TODO: change distance
+		//TODO: change gps coordinate
+		//TODO: change direction arrow
 	}
 
 	private final LocationListener listener = new LocationListener() {
@@ -342,7 +350,7 @@ public class MainActivity extends FragmentActivity {
 		}
 		return provider1.equals(provider2);
 	}
-
+	
 	// AsyncTask encapsulating the reverse-geocoding API. Since the geocoder API
 	// is blocked,
 	// we do not want to invoke it from the UI thread.
@@ -385,7 +393,7 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Dialog to prompt users to enable GPS on the device.
 	 */

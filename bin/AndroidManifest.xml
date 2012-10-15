@@ -35,6 +35,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ojk.parkqing.MainActivity" />
         </activity>
+        <activity android:name="ViewPLocationActivity" 
+            android:label="@string/title_activity_view_location" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ojk.parkqing.MainActivity" />            
+        </activity>
     </application>
 
 </manifest>

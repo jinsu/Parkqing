@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/label_ploc_latlng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/latlng" 
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/view_ploc_latlng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_ploc_latlng"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/label_ploc_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_ploc_latlng"
+        android:text="@string/address"
+        android:textSize="20sp" />
+        <TextView
+        android:id="@+id/view_ploc_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_ploc_addr"
+        android:textSize="18sp" />
+    
+    <TextView
+        android:id="@+id/label_ploc_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/distance"
+        android:layout_below="@+id/view_ploc_addr"
+        android:textSize="20sp" />
+        
+    <TextView
+        android:id="@+id/view_ploc_distance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_ploc_distance"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/get_navigation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_ploc_distance"
+        android:onClick="sendToNavigation"
+        android:text="@string/get_nav"
+        android:textSize="20sp" />
+</RelativeLayout>
