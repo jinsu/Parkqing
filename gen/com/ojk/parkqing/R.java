@@ -17,20 +17,22 @@ public final class R {
     public static final class id {
         public static final int address=0x7f070005;
         public static final int edit_loc_name=0x7f070011;
-        public static final int get_navigation_button=0x7f070019;
+        public static final int get_navigation_button=0x7f07001c;
         public static final int label_address=0x7f070004;
+        public static final int label_cur_latlng=0x7f070016;
+        public static final int label_direction=0x7f070013;
         public static final int label_latlng=0x7f070002;
         public static final int label_loc_name=0x7f070000;
-        public static final int label_ploc_addr=0x7f070015;
-        public static final int label_ploc_distance=0x7f070017;
-        public static final int label_ploc_latlng=0x7f070013;
+        public static final int label_ploc_addr=0x7f07001a;
+        public static final int label_ploc_distance=0x7f070014;
+        public static final int label_ploc_latlng=0x7f070018;
         public static final int label_recent1_latlng=0x7f07000a;
         public static final int label_recent1_ln=0x7f070008;
         public static final int label_recent2_latlng=0x7f07000f;
         public static final int label_recent2_ln=0x7f07000d;
         public static final int latlng=0x7f070003;
         public static final int loc_name=0x7f070001;
-        public static final int menu_settings=0x7f07001a;
+        public static final int menu_settings=0x7f07001d;
         public static final int recent1=0x7f070007;
         public static final int recent1_latlng=0x7f07000b;
         public static final int recent1_ln=0x7f070009;
@@ -38,9 +40,10 @@ public final class R {
         public static final int recent2_latlng=0x7f070010;
         public static final int recent2_ln=0x7f07000e;
         public static final int save_location=0x7f070006;
-        public static final int view_ploc_addr=0x7f070016;
-        public static final int view_ploc_distance=0x7f070018;
-        public static final int view_ploc_latlng=0x7f070014;
+        public static final int view_cur_latlng=0x7f070017;
+        public static final int view_ploc_addr=0x7f07001b;
+        public static final int view_ploc_distance=0x7f070015;
+        public static final int view_ploc_latlng=0x7f070019;
         public static final int view_recent_button=0x7f070012;
     }
     public static final class layout {
@@ -57,25 +60,27 @@ public final class R {
         public static final int address=0x7f040005;
         public static final int app_name=0x7f040000;
         public static final int button_park=0x7f040004;
-        public static final int distance=0x7f040009;
+        public static final int distance=0x7f04000b;
         public static final int edit_location_str0=0x7f040003;
         public static final int enable_gps=0x7f040006;
         public static final int enable_gps_dialog=0x7f040007;
-        public static final int get_nav=0x7f040015;
+        public static final int get_nav=0x7f040017;
+        public static final int label_direction=0x7f04000a;
+        public static final int label_ploc_latlng=0x7f040009;
         public static final int latlng=0x7f040008;
-        public static final int loc_name=0x7f04000a;
+        public static final int loc_name=0x7f04000c;
         public static final int menu_settings=0x7f040001;
-        public static final int not_support_gps=0x7f04000e;
-        public static final int not_support_network=0x7f04000f;
-        public static final int pLocation=0x7f040013;
-        public static final int recentLocation=0x7f04000c;
-        public static final int save_location=0x7f04000b;
-        public static final int title_activity_display_parking_location=0x7f040010;
+        public static final int not_support_gps=0x7f040010;
+        public static final int not_support_network=0x7f040011;
+        public static final int pLocation=0x7f040015;
+        public static final int recentLocation=0x7f04000e;
+        public static final int save_location=0x7f04000d;
+        public static final int title_activity_display_parking_location=0x7f040012;
         public static final int title_activity_main=0x7f040002;
-        public static final int title_activity_recent_location=0x7f040011;
-        public static final int title_activity_view_location=0x7f040012;
-        public static final int unknown=0x7f04000d;
-        public static final int view_recent=0x7f040014;
+        public static final int title_activity_recent_location=0x7f040013;
+        public static final int title_activity_view_location=0x7f040014;
+        public static final int unknown=0x7f04000f;
+        public static final int view_recent=0x7f040016;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

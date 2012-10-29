@@ -8,7 +8,9 @@
     <string name="address">Address:</string>
     <string name="enable_gps">Enable GPS</string>
     <string name="enable_gps_dialog">GPS provider not enabled. Would you like to enable it?</string>
-    <string name="latlng">Lat/Long:</string>
+    <string name="latlng">Your Lat/Long:</string>
+    <string name="label_ploc_latlng">Destination Lat/Long:</string>
+    <string name="label_direction">Direction</string>
     <string name="distance">Distance:</string>
     <string name="loc_name">Location Name</string>
     <string name="save_location">Remember ParKQing</string>

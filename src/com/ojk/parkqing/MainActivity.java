@@ -30,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
+	//TODO: implement LocationListener as a Service rather than as a private instance.
+	
 	public final static String ADDRESS = "com.ojk.parkqing.ADDRESS";
 	public final static String VIEW_ONLY = "com.ojk.parkqing.VIEW_ONLY";
 

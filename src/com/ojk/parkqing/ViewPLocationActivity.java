@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 public class ViewPLocationActivity extends FragmentActivity {
 	private TextView mLatLng;
+	private TextView pLatLng;
 	private TextView mAddr;
 	private TextView mDist;
 	private String mLocName;
@@ -65,7 +66,8 @@ public class ViewPLocationActivity extends FragmentActivity {
 	    //hookup the layout
 	    setContentView(R.layout.activity_view_plocation);
 	    
-	    mLatLng = (TextView) findViewById(R.id.view_ploc_latlng);
+	    pLatLng = (TextView) findViewById(R.id.view_ploc_latlng);
+	    mLatLng = (TextView) findViewById(R.id.view_cur_latlng);
 	    mAddr = (TextView) findViewById(R.id.view_ploc_addr);
 	    mDist = (TextView) findViewById(R.id.view_ploc_distance);
 	    
@@ -151,7 +153,7 @@ var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 var d = R * c;
 		 **/
-		//mLat
+		//mLatitude
 		//double dLat = (m)
 		//MainActivity.mLatitude;
 		//MainActivity.mLongitude;
@@ -176,6 +178,7 @@ var d = R * c;
 	private void setup() {
 		Location gpsLocation = null;
 		mLocationManager.removeUpdates(listener);
+		pLatLng.setText(Double.toString(mLon) + ", " + Double.toString(mLat));
 		mLatLng.setText(R.string.unknown);
 		mAddr.setText(R.string.unknown);
 		// Request updates from both coarse and fine providers
