@@ -16,7 +16,7 @@ public final class R {
     }
     public static final class id {
         public static final int address=0x7f070005;
-        public static final int edit_loc_name=0x7f070011;
+        public static final int edit_loc_name=0x7f070012;
         public static final int get_navigation_button=0x7f07001c;
         public static final int label_address=0x7f070004;
         public static final int label_cur_latlng=0x7f070016;
@@ -44,7 +44,7 @@ public final class R {
         public static final int view_ploc_addr=0x7f07001b;
         public static final int view_ploc_distance=0x7f070015;
         public static final int view_ploc_latlng=0x7f070019;
-        public static final int view_recent_button=0x7f070012;
+        public static final int view_recent_button=0x7f070011;
     }
     public static final class layout {
         public static final int activity_display_parking_location=0x7f030000;

@@ -3,7 +3,7 @@
     <string name="app_name">ParKQing</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">ParKQing</string>
-    <string name="edit_location_str0">Name the Location!</string>
+    <string name="edit_location_str0">Name the location!</string>
     <string name="button_park">Parkq it!</string>
     <string name="address">Address:</string>
     <string name="enable_gps">Enable GPS</string>

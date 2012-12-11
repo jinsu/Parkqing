@@ -1,6 +1,9 @@
 package com.ojk.parkqing;
 
 import java.util.List;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -84,6 +87,7 @@ public class RecentLocationActivity extends ListActivity {
 		if (!isViewOnly(intent)) {
 			@SuppressWarnings("unchecked")
 			ArrayAdapter<PLocation> adapter = (ArrayAdapter<PLocation>) getListAdapter();
+			
 			// Save the new PLocation to the database
 			PLocation ploc = datasource.createLocation(rLocName, rLat, rLon);
 			//TODO: performance boost tip-> just sort the adapter
@@ -114,6 +118,10 @@ public class RecentLocationActivity extends ListActivity {
 
 	private void retrieveIntentMsg(Intent intent) {
 		rLocName = intent.getStringExtra(PLocation.LOCATION_NAME);
+		if(rLocName.length() == 0 || rLocName.equals("")) {
+			DateFormat dateFormat = new SimpleDateFormat("HH:mm yyyy/MM/dd");
+			rLocName = dateFormat.format(new Date());
+		}
 		rLon = intent.getDoubleExtra(PLocation.LONGITUDE, 0);
 		rLat = intent.getDoubleExtra(PLocation.LATITUDE, 0);
 		rAddr = intent.getStringExtra(MainActivity.ADDRESS);

@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
     android:orientation="vertical" >
-
+    
+    	<Button
+        android:id="@+id/view_recent_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendParkMessage"
+        android:text="@string/view_recent"
+        android:textSize="14sp" />
+    
     <TextView android:id="@+id/loc_name"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/view_recent_button"
         android:text="@string/loc_name" 
         android:textSize="20sp"/>
+        
     <EditText
         android:id="@+id/edit_loc_name"
         android:layout_width="240dp"
@@ -19,11 +30,21 @@
         android:layout_below="@+id/loc_name"
         android:hint="@string/edit_location_str0" >
     </EditText>
+    
+        <Button
+        android:id="@+id/save_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_loc_name"
+        android:onClick="sendParkMessage"
+        android:text="@string/button_park"
+        android:textSize="30sp" />
+    
 	 <TextView
         android:id="@+id/label_latlng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_loc_name"
+        android:layout_below="@+id/save_location"
         android:text="@string/latlng" 
         android:textSize="20sp" />
     
@@ -41,7 +62,8 @@
         android:layout_below="@+id/latlng"
         android:text="@string/address"
         android:textSize="20sp" />
-    
+    	
+
     <TextView
         android:id="@+id/address"
         android:layout_width="fill_parent"
@@ -49,23 +71,7 @@
         android:layout_below="@+id/label_address"
         android:textSize="18sp" />
 	
-	<Button
-        android:id="@+id/save_location"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/address"
-        android:onClick="sendParkMessage"
-        android:text="@string/button_park"
-        android:textSize="18sp" />
-	<Button
-        android:id="@+id/view_recent_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/save_location"
-        android:layout_toRightOf="@+id/save_location"
-        android:onClick="sendParkMessage"
-        android:text="@string/view_recent"
-        android:textSize="18sp" />
+
    
 
     </RelativeLayout>
